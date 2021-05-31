@@ -1,0 +1,23 @@
+{
+  "name": "iambot",
+  "version": "2.0.0",
+  "description": "new bot i'm making",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MRSS02/IAmBotv2.git"
+  },
+  "author": "MRSS02",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MRSS02/IAmBotv2/issues"
+  },
+  "homepage": "https://github.com/MRSS02/IAmBotv2#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  }
+}
