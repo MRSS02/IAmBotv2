@@ -13,10 +13,9 @@ client.on("message", (message) => {
    message.react("<:noXP:848925909858910259>")
   if (content.toLowerCase().includes(badword)
   && categoryId != 847264659455082527)
-   message.delete()
-  if (content.toLowerCase().includes("bad word"))
-   message.author.send("bad word").catch(error =>
-   console.log(error))
+   message.delete().catch(error =>
+     console.log(error))
+  
 
 })
 
