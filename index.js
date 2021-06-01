@@ -7,12 +7,16 @@ const badword = process.env.BADWORDS.toLowerCase()
 client.on("message", (message) => {
   content = message.content
   channelId = message.channel.id
-  categoryId = message.channel.parent.id
+  if (message.channel.type !== "dm") categoryId = message.channel.parent.id
+   else categoryId = null
   if(content.includes("no xp role") && channelId == 848929953641791555)
    message.react("<:noXP:848925909858910259>")
   if (content.toLowerCase().includes(badword)
   && categoryId != 847264659455082527)
    message.delete()
+  if (content.toLowerCase().includes("bad word"))
+   message.author.send("bad word").catch(error =>
+   console.log(error))
 
 })
 
