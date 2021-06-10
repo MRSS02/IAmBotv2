@@ -3,6 +3,7 @@ const Discord = require("discord.js")
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 const token = process.env.TOKEN
 const badword = process.env.BADWORDS.toLowerCase()
+const goodword = process.env.GOODWORDS.toLowerCase()
 
 client.on("message", (message) => {
   content = message.content
@@ -12,10 +13,11 @@ client.on("message", (message) => {
   if(content.includes("no xp role") && channelId == 848929953641791555)
    message.react("<:noXP:848925909858910259>")
   if (content.toLowerCase().includes(badword)
-  && categoryId != 847264659455082527)
+  && !content.toLowerCase().includes(goodword) &&
+  categoryId != 847264659455082527)
    message.delete().catch(error =>
      console.log(error))
-  
+
 
 })
 
