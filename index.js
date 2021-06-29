@@ -4,7 +4,7 @@ const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 const token = process.env.TOKEN
 const badword = process.env.BADWORDS.toLowerCase()
 const goodword = process.env.GOODWORDS.toLowerCase()
-const guilds = process.env.GUILDS.loLowerCase()
+const guilds = process.env.GUILDS
 
 client.on("message", (message) => {
   content = message.content
