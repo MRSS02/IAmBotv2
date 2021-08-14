@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "new bot i'm making",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  }
   "scripts": {
     "start": "node ."
   },

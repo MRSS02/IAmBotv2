@@ -14,7 +14,7 @@ badword, goodword) {
 exports.evalReact = async function evalReact(message, content, channelId,
   rolemessageIDs) {
   if(content.toLowerCase().includes("question of the day")
-  && channelId == 848694828983910431) {
+  && channelId == 848929953641791555) {
    message.react("<:questionline:875897926919028747>")
    rolemessageIDs.qotd = message.id
   }
