@@ -1,76 +1,48 @@
 require("dotenv").config()
+const automod = require("./scripts/automod")
+
 const Discord = require("discord.js")
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
+const intents = new Discord.Intents(parseInt(process.env.INTENTS, 10))
+const bot = new Discord.Client({intents, partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 const token = process.env.TOKEN
 const badword = process.env.BADWORDS.toLowerCase()
 const goodword = process.env.GOODWORDS.toLowerCase()
 const guilds = process.env.GUILDS
+let rolemessageIDs = {}
 
-client.on("message", (message) => {
+//bot runs this everytime it starts
+bot.on("ready", () => {
+  console.log(`Hey. I was initialized inside ${bot.guilds.cache.size} servers.`);
+  let initialact = Math.round(Math.random())
+  if (initialact == 0) bot.user.setActivity("Meleeeee!");
+  else bot.user.setActivity("DELTARUNE chap. 2");
+  //let infra = bot.channels.cache.get("856675093802123294")
+  //infra.send("").then(console.log("i sent the test message.")).catch((e) => console.log(e))
+})
+
+//bot runs this everytime a message is posted.
+bot.on("messageCreate", (message) => {
   content = message.content
+  console.log(content)
   channelId = message.channel.id
   guildId = message.guild.id
+  automod.evalReact(message, content, channelId, rolemessageIDs)
   if (guildId == guilds) {
-    if (message.channel.type !== "dm") categoryId = message.channel.parent.id
-     else categoryId = null
-    if(content.includes("no xp role") && channelId == 848929953641791555)
-     message.react("<:noXP:848925909858910259>")
-    if (content.toLowerCase().includes(badword)
-    && !content.toLowerCase().includes(goodword) &&
-    categoryId != 847264659455082527)
-     message.delete().catch(error =>
-       console.log(error))
+   automod.evalDelete(message, content, channelId, badword, goodword)
   }
 
 
 })
 
-client.on('messageReactionAdd', async (reaction, user) => {
-    if (reaction.partial) {
-      try {
-          await reaction.fetch();
-      } catch (error) {
-          console.error('Fetching message failed: ', error);
-          return;
-      }
-    }
-    if (!user.bot) {
-      const clubbers = reaction.message.guild.roles.cache.find(r => r.id == 847271805227106305);
-      const noxp = reaction.message.guild.roles.cache.find(r => r.id == 848927759446442045);
-
-      const { guild } = reaction.message
-
-      const member = guild.members.cache.find(member => member.id === user.id);
-
-      if (reaction.message.id == 848697560943296542
-      && reaction.emoji.id == 848749688424628224)
-      member.roles.add(clubbers); //add role clubers if ids match
-      else if (reaction.message.id == 848934354100813845
-      && reaction.emoji.id == 848925909858910259)
-      member.roles.add(noxp) //add role noexp if ids match
-    }
+//bit runs this everytime a reaction is added.
+bot.on('messageReactionAdd', async (reaction, user) => {
+   automod.reactionRolesAdd(reaction, user, rolemessageIDs)
 });
 
-client.on('messageReactionRemove', async (reaction, user) => {
-    if (reaction.partial) {
-      try {
-          await reaction.fetch();
-      } catch (error) {
-          console.error('Fetching message failed: ', error);
-          return;
-      }
-    }
-    if (!user.bot) {
-      const noxp = reaction.message.guild.roles.cache.find(r => r.id == 848927759446442045);
-
-      const { guild } = reaction.message
-
-      const member = guild.members.cache.find(member => member.id === user.id);
-
-      if (reaction.message.id == 848934354100813845
-      && reaction.emoji.id == 848925909858910259)
-      member.roles.remove(noxp) //remove role noexp if ids match
-    }
+//bot runs this everytime a reaction is removed
+bot.on('messageReactionRemove', async (reaction, user) => {
+    automod.reactionRolesRemove(reaction, user, rolemessageIDs)
 });
 
-client.login(token)
+//This sets the bot online.
+bot.login(token)
