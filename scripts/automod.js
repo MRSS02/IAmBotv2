@@ -48,7 +48,7 @@ rolemessageIDs) {
     else if (reaction.message.id == 848934354100813845
     && reaction.emoji.id == 848925909858910259)
     member.roles.add(noxp) //add role noexp if ids match
-    else if (reaction.message.id == 588452209746771988
+    else if (reaction.message.id == 876219294189510696
     && reaction.emoji.id == 875897926919028747)
     member.roles.add(qotd) //add role qotd if ids match
   }
@@ -78,7 +78,7 @@ exports.reactionRolesRemove = async function reactionRolesRemove(reaction,
     if (reaction.message.id == 848934354100813845
     && reaction.emoji.id == 848925909858910259)
     member.roles.remove(noxp) //remove role noexp if ids match
-    else if (reaction.message.id == rolemessageIDs.qotd
+    else if (reaction.message.id == 876219294189510696
     && reaction.emoji.id == 875897926919028747)
     member.roles.remove(qotd) //add role qotd if ids match
 
