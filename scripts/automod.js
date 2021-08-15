@@ -48,7 +48,7 @@ rolemessageIDs) {
     else if (reaction.message.id == 848934354100813845
     && reaction.emoji.id == 848925909858910259)
     member.roles.add(noxp) //add role noexp if ids match
-    else if (reaction.message.id == rolemessageIDs.qotd
+    else if (reaction.message.id == 588452209746771988
     && reaction.emoji.id == 875897926919028747)
     member.roles.add(qotd) //add role qotd if ids match
   }
