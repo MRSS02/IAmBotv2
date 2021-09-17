@@ -31,7 +31,7 @@ exports.dm = function(message, content, guild, channel, bot) {
                 
                 for (let [key] of role?.members.entries()) {
                     bot.users.fetch(key).then((user) => {
-                        //if (message.author.id === user.id) return;
+                        if (message.author.id === user.id) return;
                         user.send({embeds:[notification]});
                     }).catch(e => console.log(e))
                 }
