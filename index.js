@@ -31,16 +31,15 @@ bot.on("ready", () => {
 
 //bot runs this everytime a message is posted.
 bot.on("messageCreate", (message) => {
-  content = message.content;
-  channelId = message.channel.id;
-  guildId = message?.guild?.id;
-  if (!bannedGuilds.includes(guildId)) {
+  content = message?.content;
+  channel = message?.channel;
+  guild = message?.guild;
+  if (!bannedGuilds.includes(guild?.id)) {
    automod.evalDelete(message, content, badwords, goodwords);
   }
   let questionChannels = process.env.QUESTION_CHANNELS?.split(",")
-  if (questionChannels.includes(channelId)) {
-   
-    questions.dm(message, content, bot)
+  if (questionChannels.includes(channel.id)) {
+    questions.dm(message, content, guild, channel, bot);
   }
   if (content.substring(0, prefix.length) === prefix) {
     content = content.substring(prefix.length, content.length); 
@@ -48,7 +47,7 @@ bot.on("messageCreate", (message) => {
       if (letter === " ") content = content.replace(letter, "");
       else break; 
     } // cleans empty space at the left of content after removing prefix
-    commands(message, content, bot);
+    commands(message, content, guild, channel, bot);
   }
 
 })
