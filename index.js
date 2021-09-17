@@ -1,5 +1,6 @@
 require("dotenv").config();
 const automod = require("./scripts/automod");
+const questions = require("./scripts/questions");
 const legacy = require("./scripts/legacy"); //legacy, hardcoded code meant to work as reaction roles in a specific server
 const commands = require("./scripts/commands");
 
@@ -8,9 +9,9 @@ const Discord = require("discord.js");
 const intents = new Discord.Intents(parseInt(process.env.INTENTS, 10));
 const bot = new Discord.Client({intents, partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const token = process.env.TOKEN;
-const badwords = process.env.BADWORDS.toLowerCase().split(",");
-const goodwords = process.env.GOODWORDS.toLowerCase().split(",");
-const bannedGuilds = process.env.BANNED_GUILDS.split(",");
+const badwords = process.env.BADWORDS?.toLowerCase().split(",");
+const goodwords = process.env.GOODWORDS?.toLowerCase().split(",");
+const bannedGuilds = process.env.BANNED_GUILDS?.split(",");
 const prefix = "m!";
 let rolemessageIDs = {};
 
@@ -32,13 +33,22 @@ bot.on("ready", () => {
 bot.on("messageCreate", (message) => {
   content = message.content;
   channelId = message.channel.id;
-  guildId = message.guild.id;
+  guildId = message?.guild?.id;
   if (!bannedGuilds.includes(guildId)) {
    automod.evalDelete(message, content, badwords, goodwords);
   }
+  let questionChannels = process.env.QUESTION_CHANNELS?.split(",")
+  if (questionChannels.includes(channelId)) {
+   
+    questions.dm(message, content, bot)
+  }
   if (content.substring(0, prefix.length) === prefix) {
-    prefixRemoved = content.substring(prefix.length, content.length); 
-    commands(message, prefixRemoved);
+    content = content.substring(prefix.length, content.length); 
+    for (let letter of content) {
+      if (letter === " ") content = content.replace(letter, "");
+      else break; 
+    } // cleans empty space at the left of content after removing prefix
+    commands(message, content, bot);
   }
 
 })

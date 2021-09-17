@@ -3,7 +3,7 @@ require("dotenv").config()
 exports.evalDelete = async function evalDelete(message, content, badwords, 
   goodwords) {
 
-  if (message.channel.type !== "dm") categoryId = message.channel.parent.id;
+  if (message.channel.type !== "dm") categoryId = message.channel?.parent?.id;
    else categoryId = null;
   let allowed = process.env.EXCEPTION_CATHEGORIES.split(",")
   function verify() {
