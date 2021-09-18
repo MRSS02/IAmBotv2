@@ -2,7 +2,8 @@ require("dotenv").config();
 const { MessageEmbed } = require('discord.js');
 
 exports.dm = function(message, content, guild, channel, bot) {
-
+   
+   if (content.includes("?"))
    guild.members.fetch(message.author.id).then((member) => {
   
 
@@ -31,7 +32,7 @@ exports.dm = function(message, content, guild, channel, bot) {
                 
                 for (let [key] of role?.members.entries()) {
                     bot.users.fetch(key).then((user) => {
-                        if (message.author.id === user.id) return;
+                        //if (message.author.id === user.id) return;
                         user.send({embeds:[notification]});
                     }).catch(e => console.log(e))
                 }
