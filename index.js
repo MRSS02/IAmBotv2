@@ -15,12 +15,17 @@ const bannedGuilds = process.env.BANNED_GUILDS?.split(",");
 const prefix = "m!";
 let rolemessageIDs = {};
 
-//bot runs this everytime it starts
-bot.on("ready", () => {
-  console.log(`Hey. I was initialized inside ${bot.guilds.cache.size} servers.`);
+function changeStatus() {
   let initialact = Math.round(Math.random());
   if (initialact == 0) bot.user.setActivity("Meleeeee!");
   else bot.user.setActivity("DELTARUNE chap. 2");
+}
+
+//bot runs this everytime it starts
+bot.on("ready", () => {
+  console.log(`Hey. I was initialized inside ${bot.guilds.cache.size} servers.`);
+  changeStatus();
+  setInterval(changeStatus, 900000);
   //bot.channels.fetch("").then((channel) => {
   //  channel.messages.fetch("").then((message) => {
   //    message.reply("")
