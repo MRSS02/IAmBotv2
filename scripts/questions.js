@@ -16,10 +16,11 @@ exports.dm = function(message, content, guild, channel, bot) {
             reason: "",
         }).then((thread) => {
 
-            console.log(thread);
+            console.log(message.author.username);
+            let name = member.nickname ? member.nickname : message.author.username; 
             let notification = new MessageEmbed()
             .setColor("#83c8eb")
-            .setAuthor(`${member.nickname} tem uma dúvida!`,
+            .setAuthor(`${name} tem uma dúvida!`,
             message.author.displayAvatarURL(), 
             message.url)
             .addField(`Em ${guild.name}`, `<#${channel.id}>`, true)
