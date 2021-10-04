@@ -15,7 +15,7 @@ exports.dm = function(message, content, guild, channel, bot) {
             autoArchiveDuration: 1440,
             reason: "",
         }).then((thread) => {
-
+        
             console.log(message.author.username);
             let name = member.nickname ? member.nickname : message.author.username; 
             let notification = new MessageEmbed()
