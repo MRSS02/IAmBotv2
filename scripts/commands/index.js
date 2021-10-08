@@ -1,16 +1,31 @@
-module.exports = function commands(message, content, guild, channelId, bot) {
+const ban = require("./ban.js")
+const play = require("./play.js")
 
+module.exports = (message, content, guild, channelId, bot) => {
 
-  if (content.includes("ban")) {
-    if (content.substring(content.indexOf("ban") - 1, content.indexOf("ban")) != "\\" 
-    && message.member.permissions.has("BAN_MEMBERS")) {
-      let banned = content.substring(content.indexOf("bye") + 3).trim();
-      guild.members.ban(banned).then(() => message.channel.send(`I banned ${banned}.`))
-      .catch(e => {
-        message.channel.send(`I coun't ban ${banned}.`);
-        console.log(e);
-      })
-    }
+  let command = content.substring(0, content.includes(" ") ? 
+    content.indexOf(" ") : content.length);
+  console.log(command); 
+  content = content.substring(command.length, content.length);  
+  for (let letter of content) {
+    if (letter === " ") content = content.replace(letter, "");
+    else break; 
+  } // cleans empty space at the left of content after removing command
+  let author = message.member.nickname ? 
+    message.member.nickname : message.author.username; 
+  console.log(content)
+
+  switch (command) {
+    case "ban":
+      ban(message, content, author, guild);  
+      break;
+    case "play":
+      play(message, content, author, guild);
+      break;  
+
+    default:
+      break;
   }
+
 
 }
