@@ -12,22 +12,41 @@ const token = process.env.TOKEN;
 let rolemessageIDs = {};
 
 function changeStatus() {
-  let initialact = Math.round(Math.random());
-  if (initialact == 0) bot.user.setActivity("Meleeeee!");
-  else bot.user.setActivity("DELTARUNE chap. 2");
+  //let initialact = Math.round(Math.random());
+  //if (initialact == 0) bot.user.setActivity("Meleeeee!");
+  //else bot.user.setActivity("DELTARUNE chap. 2");
+  let max = (Math.floor(Math.random() * (10 - 1)) + 1) * (Math.floor(Math.random() * (10 - 2)) + 2) + 1
+  let kromer = Math.floor(Math.random() * (max - 2)) + 2
+  kromer = (kromer * (kromer - 1) * (kromer - 1)) 
+  kromer -= Math.floor(Math.random() * (kromer - Math.floor(kromer / 2))) + Math.floor(kromer / 2)
+  kromer += Math.floor(Math.random() * 5) * Math.floor(Math.random() * 5)
+  console.log(kromer)
+  bot.user.setActivity(`${kromer} kromer`);
 }
 
 //bot runs this everytime it starts
 bot.on("ready", () => {
   console.log(`Hey. I was initialized inside ${bot.guilds.cache.size} servers.`);
-  changeStatus();
-  setInterval(changeStatus, 900000);
-  //bot.channels.fetch("").then((channel) => {
-  //  channel.messages.fetch("").then((message) => {
-  //    message.reply("")
-  //  })
-  //  }
-  //);
+  // bot.guilds.fetch("").then((guild) => {
+  //   guild.members.fetch().then((members) => {
+  //     for (let [key] of members.entries()) {
+  //       bot.users.fetch(key).then((user) => {
+  //         user.send("**DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!**").catch("[[Hyperlink blocked]]")
+  //         console.log("DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!")
+  //       }).catch(e => console.log(e))
+  //     }
+  //   })
+  // })
+  // changeStatus();
+  setInterval(changeStatus, 4000)
+  //setInterval(changeStatus, 900000);
+  //bot.channels.fetch("").then((channel) => channel.send())
+  // bot.channels.fetch("").then((channel) => {
+  //   channel.messages.fetch("").then((message) => {
+  //     message.reply("**DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!**")
+  //   })
+  //   }
+  // );
 })
 
 //bot runs this everytime a message is posted.
