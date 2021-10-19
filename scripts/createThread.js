@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { MessageEmbed } = require('discord.js');
 
-exports.dm = function(message, content, guild, channel, bot) {
+exports.questions = function(message, content, guild, channel, bot) {
    
    if (content.includes("?"))
    guild.members.fetch(message.author.id).then((member) => {
@@ -14,7 +14,7 @@ exports.dm = function(message, content, guild, channel, bot) {
             name: `${content.length > 97 ? content.substring(0, 97) + "..." : content}`,
             autoArchiveDuration: 1440,
             reason: "",
-        }).then((thread) => {
+        }).then(() => {
         
             console.log(message.author.username);
             let name = member.nickname ? member.nickname : message.author.username; 
@@ -44,4 +44,34 @@ exports.dm = function(message, content, guild, channel, bot) {
             
     }).catch(e => console.log(e));
    
+}
+
+exports.daily = function(message) {  
+    
+    if (!message.embed ) return;
+        
+        console.log(message.embed);
+        let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        console.log(date);
+        message.startThread({
+            name: `Daily ${date}`,
+            autoArchiveDuration: 1440,
+            reason: "",
+        }).catch(e => console.log(e));
+            
+}
+
+exports.proposals = function(message) {
+
+    let content = message.content; 
+    if (!content.includes("-")) return;
+        
+        let proposal = content.substring(content.indexOf("-") + 1); 
+        console.log(message.embed);
+        message.startThread({
+            name: `${proposal}`,
+            autoArchiveDuration: 1440,
+            reason: "",
+        }).catch(e => console.log(e)); 
+
 }
