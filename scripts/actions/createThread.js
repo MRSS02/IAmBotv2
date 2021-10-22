@@ -61,15 +61,14 @@ exports.daily = function(message) {
             
 }
 
-exports.proposals = function(message) {
+exports.otherChannels = function(message) {
 
     let content = message.content; 
-    if (!content.includes("-")) return;
         
-        let proposal = content.substring(content.indexOf("-") + 1); 
-        console.log(message.embed);
+        let title = content.includes("-") ? 
+          content.substring(content.indexOf("-") + 1) : content; 
         message.startThread({
-            name: `${proposal}`,
+            name: `${title}`,
             autoArchiveDuration: 1440,
             reason: "",
         }).catch(e => console.log(e)); 

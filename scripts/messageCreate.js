@@ -14,7 +14,7 @@ module.exports = function messageCreate(message, bot) {
     automod.evalDelete(message, content, badwords, goodwords);
 
     let questionChannels = process.env.QUESTION_CHANNELS?.split(",")
-    if (questionChannels.includes(channel.id)) 
+    if (questionChannels.includes(channel?.id)) 
         createThread.questions(message, content, guild, channel, bot);
 
     let dailyMessenger = process.env.DAILY_MESSENGER;
@@ -25,7 +25,8 @@ module.exports = function messageCreate(message, bot) {
     if (channel?.parent?.id == dailyCategory && message.author?.id == dailyMessenger)
         createThread.daily(message)
 
-    if (threadChannels.includes(channel.id)) 
+
+    if (threadChannels.includes(channel?.id)) 
         createThread.otherChannels(message)    
 
     if (content.substring(0, prefix.length) === prefix) {
