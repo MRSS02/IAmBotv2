@@ -1,5 +1,5 @@
-const automod = require("./automod");
-const createThread = require("./createThread");
+const automod = require("./actions/automod");
+const createThread = require("./actions/createThread");
 const commands = require("./commands");
 const badwords = process.env.BADWORDS?.toLowerCase().split(",");
 const goodwords = process.env.GOODWORDS?.toLowerCase().split(",");
@@ -19,13 +19,14 @@ module.exports = function messageCreate(message, bot) {
 
     let dailyMessenger = process.env.DAILY_MESSENGER;
     let dailyCategory = process.env.DAILY_CATEGORY;
-    let proposalChannel = process.env.PROPOSAL_CHANNEL;
-
-    if (message.channel?.parent?.id == dailyCategory && message.author?.id == dailyMessenger)
+    let threadChannels = process.env.THREAD_CHANNELS?.split(",")
+   
+    
+    if (channel?.parent?.id == dailyCategory && message.author?.id == dailyMessenger)
         createThread.daily(message)
 
-    if (message.channel?.id == proposalChannel)
-        createThread.proposals(message)    
+    if (threadChannels.includes(channel.id)) 
+        createThread.otherChannels(message)    
 
     if (content.substring(0, prefix.length) === prefix) {
         content = content.substring(prefix.length, content.length); 

@@ -2,7 +2,7 @@ require("dotenv").config();
 
 
 const messageCreate = require("./scripts/messageCreate")
-const legacy = require("./scripts/legacy"); //legacy, hardcoded code meant to work as reaction roles in a specific server
+const legacy = require("./scripts/actions/legacy"); //legacy, hardcoded code meant to work as reaction roles in a specific server
 
 const Discord = require("discord.js");
 const intents = new Discord.Intents(parseInt(process.env.INTENTS, 10));
@@ -20,7 +20,6 @@ function changeStatus() {
   kromer = (kromer * (kromer - 1) * (kromer - 1)) 
   kromer -= Math.floor(Math.random() * (kromer - Math.floor(kromer / 2))) + Math.floor(kromer / 2)
   kromer += Math.floor(Math.random() * 5) * Math.floor(Math.random() * 5)
-  console.log(kromer)
   bot.user.setActivity(`${kromer} kromer`);
 }
 
@@ -31,22 +30,22 @@ bot.on("ready", () => {
   //   guild.members.fetch().then((members) => {
   //     for (let [key] of members.entries()) {
   //       bot.users.fetch(key).then((user) => {
-  //         user.send("**DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!**").catch("[[Hyperlink blocked]]")
-  //         console.log("DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!")
+  //         user.send("**I GAVE YOU EVERYTHING I HAD! MY LIFE ADVICE! I TOLD YOU** [4 Left] **AND ASKED YOU** [Buy] **OR** [Don't Buy]**!** [Spam Mail]").catch(() => console.log("[[Hyperlink blocked]]"))
+  //         console.log("I GAVE YOU EVERYTHING I HAD! MY LIFE ADVICE! I TOLD YOU [4 Left] AND ASKED YOU [Buy] OR [Don't Buy]! [Spam Mail]")
   //       }).catch(e => console.log(e))
   //     }
   //   })
   // })
-  // changeStatus();
+  changeStatus();
   setInterval(changeStatus, 4000)
   //setInterval(changeStatus, 900000);
-  //bot.channels.fetch("").then((channel) => channel.send())
-  // bot.channels.fetch("").then((channel) => {
-  //   channel.messages.fetch("").then((message) => {
-  //     message.reply("**DON'T FORGET TO [Like and Subscribe] FOR MORE [Hyperlink Blocked]!**")
-  //   })
+  // bot.channels.fetch("847289797970100254").then((channel) => channel.send("**DELICIOUS KROMER**"))
+  // bot.channels.fetch("847263134431182869").then((channel) => {
+  //   channel.messages.fetch("900540377294073876").then((message) => {
+  //     message.reply("**GO** [[hyperlink blocked]] **yourself HAHAHAHAHAHAHAHA!**")
+  //   }).catch(e => console.log("[[Hyperlink blocked]]\n", e))
   //   }
-  // );
+  // ).catch(e => console.log("[[Hyperlink blocked]]\n", e));
 })
 
 //bot runs this everytime a message is posted.

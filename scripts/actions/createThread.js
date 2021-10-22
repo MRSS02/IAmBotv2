@@ -47,7 +47,7 @@ exports.questions = function(message, content, guild, channel, bot) {
 }
 
 exports.daily = function(message) {  
-    
+
     if (!message.embed ) return;
         
         console.log(message.embed);
