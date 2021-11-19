@@ -66,7 +66,7 @@ exports.otherChannels = function(message) {
     let content = message.content; 
         
         let title = content.includes("-") ? 
-          content.substring(content.indexOf("-") + 1) : content; 
+          content.substring(content.indexOf("-") + 1, content.indexOf("\n")) : content; 
         message.startThread({
             name: `${title}`,
             autoArchiveDuration: 1440,
