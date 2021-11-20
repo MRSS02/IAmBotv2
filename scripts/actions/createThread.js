@@ -61,12 +61,12 @@ exports.daily = function(message) {
             
 }
 
-exports.otherChannels = function(message) {
+exports.proposals = function(message) {
 
     let content = message.content; 
         
-        let title = content.includes("-") ? 
-          content.substring(content.indexOf("-") + 1, content.indexOf("\n")) : content; 
+        let title =  
+          content.substring((content.includes("-") ? content.indexOf("-") + 1 : 0), content.includes("\n") ? content.indexOf("\n") : content.length).replace(/\[.+\]/gm, ""); 
         message.startThread({
             name: `${title}`,
             autoArchiveDuration: 1440,

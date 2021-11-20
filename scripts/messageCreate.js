@@ -19,15 +19,15 @@ module.exports = function messageCreate(message, bot) {
 
     let dailyMessenger = process.env.DAILY_MESSENGER;
     let dailyCategory = process.env.DAILY_CATEGORY;
-    let threadChannels = process.env.THREAD_CHANNELS?.split(",")
+    let proposalChannels = process.env.PROPOSAL_CHANNELS?.split(",")
    
     
     if (channel?.parent?.id == dailyCategory && message.author?.id == dailyMessenger)
         createThread.daily(message)
 
 
-    if (threadChannels.includes(channel?.id)) 
-        createThread.otherChannels(message)    
+    if (proposalChannels.includes(channel?.id)) 
+        createThread.proposals(message)    
 
     if (content.substring(0, prefix.length) === prefix) {
         content = content.substring(prefix.length, content.length); 
