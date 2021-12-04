@@ -1,7 +1,8 @@
-const ban = require("./ban.js")
-const play = require("./play.js")
+const ban = require("./ban.js");
+const play = require("./play.js");
+const deleteMessages = require("./deleteMessages");
 
-module.exports = (message, content, guild, channelId, bot) => {
+module.exports = (message, content, guild, channel, bot) => {
 
   let command = content.substring(0, content.includes(" ") ? 
     content.indexOf(" ") : content.length);
@@ -22,6 +23,10 @@ module.exports = (message, content, guild, channelId, bot) => {
     case "play":
       play(message, content, author, guild);
       break;  
+
+    case "delete":
+      deleteMessages(message, channel, content, author);
+      break;
 
     default:
       break;
