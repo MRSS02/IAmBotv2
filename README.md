@@ -9,7 +9,7 @@ Spiritual sucessor to [this little guy here](https://github.com/MRSS02/IamBot) (
 Well, i say spiritual because it's a brand new bot, made in discord.js v13, from scratch (previous one was using v12).
 I might reuse some stuff, but... for the most part, it's a new project. The old one was a mess, after all.
 
-##HOW TO RUN THE BOT:
+## HOW TO RUN THE BOT:
 
 > Well, you do need environment variables for some of the functionalities, but... 
 <br />For the bot to just work, you basically just need a token. 
