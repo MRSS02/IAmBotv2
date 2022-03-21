@@ -48,7 +48,7 @@ exports.questions = function(message, content, guild, channel, bot) {
 
 exports.daily = function(message) {  
 
-    if (!message.embed ) return;
+    if (!message.embed) return;
         
         console.log(message.embed);
         let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');

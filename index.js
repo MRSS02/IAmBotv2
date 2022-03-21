@@ -39,9 +39,9 @@ bot.on("ready", () => {
   changeStatus();
   setInterval(changeStatus, 4000)
   //setInterval(changeStatus, 900000);
-  // bot.channels.fetch("847289797970100254").then((channel) => channel.send("**DELICIOUS KROMER**"))
-  // bot.channels.fetch("847263134431182869").then((channel) => {
-  //   channel.messages.fetch("900540377294073876").then((message) => {
+  // bot.channels.fetch("").then((channel) => channel.send("**DELICIOUS KROMER**"))
+  // bot.channels.fetch("").then((channel) => {
+  //   channel.messages.fetch("").then((message) => {
   //     message.reply("**GO** [[hyperlink blocked]] **yourself HAHAHAHAHAHAHAHA!**")
   //   }).catch(e => console.log("[[Hyperlink blocked]]\n", e))
   //   }
